@@ -1,0 +1,32 @@
+MODL Format
+
+-Header-
+0x00: Magic 'MODL'
+0x04: Num. vertices (u32 big endian)
+0x08: Num. texcoords (u32 big endian)
+0x0C: Num. triangles (u32 big endian)
+0x10: Num. textures (u32 big endian)
+
+-Vertex table-
+Each vertex is stored as:
+0x00: X (float32 big endian)
+0x04: Y (float32 big endian)
+0x08: Z (float32 big endian)
+
+-Texcoord table-
+Each texcoord is stored as:
+0x00: X (float32 big endian)
+0x04: Y (float32 big endian)
+
+-Triangle table-
+Each triangle is stored as:
+0x00: Vertex 1 (u32 big endian zero-based index)
+0x04: Vertex 2 (u32 big endian zero-based index)
+0x08: Vertex 3 (u32 big endian zero-based index)
+0x0C: Texcoord 1 (u32 big endian zero-based index)
+0x10: Texcoord 2 (u32 big endian zero-based index)
+0x14: Texcoord 3 (u32 big endian zero-based index)
+0x18: Texture (u32 big endian zero-based index)
+
+-Texture section-
+Series of null-terminated string literals, one after the other. The first string is the texture ID of the first texture (i.e. texture #0), the second string is the ID of the second texture (i.e. texture #1), and so on. I am intentionally being vague by using the term "texture ID", so that its meaning can be up to you, and implementation-specific. For example, texture ID may be the filename of the texture's image file (e.g. "brick.png"), or it could be a solid colour (e.g. "#94ADF2"), or whatever you want it to be. The python script will prompt you to enter the texture ID you want to be associated with each material in the .obj file.
